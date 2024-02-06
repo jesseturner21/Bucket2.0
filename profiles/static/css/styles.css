@@ -1,3 +1,21 @@
 body{
-    background-color: red;
+    background-color: #F0F8FF;
+    color: #FF9F45;
+
 }
+.navbar {
+    background-color: #55BCC9; 
+  }
+  
+  .navbar a {
+    color: #F0F8FF; 
+  }
+  
+
+:root {
+    /* Colors */
+    --cloud-white: #F0F8FF;
+    --blue: #55BCC9;
+    --green: #96BB7C;
+    --orange: #FF9F45;
+  }

@@ -20,29 +20,32 @@
   <body>
     {% comment %} TODO: DISPLAY NAV bar, CREATE LOGIN {% endcomment %}
       <!-- nav bar -->
-      <nav class="navbar navbar-expand-lg ">
-        <div class="container">
-          <a class="navbar-brand nav-item" href="/">Bucket</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto navbar-list">
-              <li class="nav-item">
-                <a class="nav-link" href="/profile/login">Login/Register</a>
-              </li>
-            </ul>
-          </div>
+     <!-- Simplified nav bar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="/">Bucket</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto"> 
+            {% if not user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/login">Login</a>
+            </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="/profile/logout">Logout</a>
+            </li>
+          {% endif %}
+
+          
+          </ul>
         </div>
-      </nav>
+      </div>
+    </nav>
+
 
     <main>
       {% block content %}
