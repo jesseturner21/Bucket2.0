@@ -1,18 +1,26 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import UserProfileForm, UserRegisterForm, UserLoginForm
+from .forms import UserProfileForm, UserRegisterForm, UserLoginForm, ContentForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from .models import UserProfile
 
 @login_required
 def edit_user_profile(request):
+    try:
+        profile = request.user.userprofile
+    except UserProfile.DoesNotExist:
+        # If UserProfile doesn't exist, create it
+        UserProfile.objects.create(user=request.user)
+        profile = request.user.userprofile
+
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+        form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('profile_view', username=request.user.username)
+            return redirect('home')
     else:
-        form = UserProfileForm(instance=request.user.userprofile)
+        form = UserProfileForm(instance=profile)
     return render(request, 'edit_profile.html', {'form': form})
 
 
@@ -42,8 +50,24 @@ def user_login(request):
     else:
         form = UserLoginForm()
     return render(request, 'login.html', {'form': form})
+
+@login_required
+def create_content(request):
+    if request.method == 'POST':
+        form = ContentForm(request.POST)
+        if form.is_valid():
+            content = form.save(commit=False)  
+            content.user = request.user  
+            content.save() 
+            return redirect('home')
+    else:
+        form = ContentForm()
+    return render(request, 'create_content.html', {'form': form})
+
+@login_required
 def home(request):
     user = request.user
-    return render(request, 'home.html', {'user': user})
+    content = user.content.all()
+    return render(request, 'home.html', {'user': user, 'content':content})
 
 
