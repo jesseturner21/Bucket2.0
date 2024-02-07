@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h4> {{user.username}} </h4>
+  {% for slip in content %}
+    <div> {{slip.text}}</div><div>{{slip.total_likes}}</div>
+        <form action="{% url 'like_content' slip.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Like</button>
+        </form>
+  {% endfor %}
+{% endblock %}
