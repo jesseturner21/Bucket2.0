@@ -7,7 +7,8 @@ from profiles.models import Content, Like
 def feed(request):
     user = request.user
     content = Content.objects.all()
-    return render(request, 'feed.html', {'user': user, 'content':content})
+    return render(request, 'feed.html', {'user': user, 'content': content})
+
 
 @login_required
 def like_content(request, content_id):

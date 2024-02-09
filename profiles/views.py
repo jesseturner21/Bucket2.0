@@ -4,7 +4,7 @@ from .forms import UserProfileForm, UserRegisterForm, UserLoginForm, ContentForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .models import UserProfile
-# TODO: MAKE + BUTTON IN THE BUCKET, STYLE SLIPS, MOVE LOGOUT IN PROGILE AND MAKE NAV GO TO PROFILE
+# TODO: Like button, add username and profile photo. 
 @login_required
 def edit_user_profile(request):
     try:

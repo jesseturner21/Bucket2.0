@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
-
+{% block conditional_navbar_content %}
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="/profile/logout">Logout</a>
+        </li>
+    {% endif %}
+{% endblock conditional_navbar_content %}
 {% block content %}
   <h4> {{user.username}} </h4>
   <div> {{user.userprofile.bio}} </div>
@@ -7,5 +13,4 @@
   {% for slip in content %}
     <div> {{slip.text}}</div>
   {% endfor %}
-  <a href="./new_slip"> + </a>
 {% endblock %}
