@@ -7,10 +7,15 @@
     {% endif %}
 {% endblock conditional_navbar_content %}
 {% block content %}
+<img class="profile-photo" src="{{user.userprofile.profile_pic.url}}">
   <h4> {{user.username}} </h4>
   <div> {{user.userprofile.bio}} </div>
   <a href="./edit"> Edit Profile</a>
   {% for slip in content %}
-    <div> {{slip.text}}</div>
+    <div class="slip-container">
+      <div class="slip-user"> {{slip.user}} - </div>
+        <div class="slip-text">{{ slip.text }}</div>
+        <div class="slip-likes">{{ slip.total_likes }}</div>
+    </div>
   {% endfor %}
 {% endblock %}

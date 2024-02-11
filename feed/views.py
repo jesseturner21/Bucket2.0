@@ -9,7 +9,6 @@ def feed(request):
     content = Content.objects.all()
     return render(request, 'feed.html', {'user': user, 'content': content})
 
-
 @login_required
 def like_content(request, content_id):
     content = get_object_or_404(Content, id=content_id)

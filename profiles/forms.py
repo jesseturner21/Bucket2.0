@@ -6,7 +6,7 @@ from .models import UserProfile, Content
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['bio']
+        fields = ['bio', 'profile_pic']
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
